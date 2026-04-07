@@ -10,6 +10,9 @@ const services = [
   'Full-stack web apps with React, Node.js, and Express',
   'REST APIs, authentication, and backend workflows',
   'MongoDB and SQL data modeling for production apps',
+  'Responsive UI design with clean, modern aesthetics',
+  'Database optimization and API performance',
+  'Deployment, testing, and code quality assurance',
 ]
 
 const projects = [
