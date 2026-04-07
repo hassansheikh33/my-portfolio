@@ -20,7 +20,7 @@ function Navigation({ brand }: NavigationProps) {
       </nav>
 
       <button
-        className="menu-toggle"
+        className={`menu-toggle${isOpen ? ' is-open' : ''}`}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
         onClick={toggle}
@@ -30,22 +30,23 @@ function Navigation({ brand }: NavigationProps) {
         <span></span>
       </button>
 
-      {isOpen && (
-        <nav className="mobile-nav" aria-label="Mobile navigation">
-          <a href="#work" onClick={close}>
-            Work
-          </a>
-          <a href="#services" onClick={close}>
-            Services
-          </a>
-          <a href="#about" onClick={close}>
-            About
-          </a>
-          <a href="#contact" onClick={close}>
-            Contact
-          </a>
-        </nav>
-      )}
+      <nav
+        className={`mobile-nav${isOpen ? ' is-open' : ''}`}
+        aria-label="Mobile navigation"
+      >
+        <a href="#work" onClick={close}>
+          Work
+        </a>
+        <a href="#services" onClick={close}>
+          Services
+        </a>
+        <a href="#about" onClick={close}>
+          About
+        </a>
+        <a href="#contact" onClick={close}>
+          Contact
+        </a>
+      </nav>
     </header>
   )
 }

@@ -1,5 +1,6 @@
 .page-shell {
-  width: min(1120px, calc(100% - 32px));
+  width: 100%;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 16px 0 40px;
 }
@@ -9,15 +10,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 8px 12px 24px;
+  padding: 8px 20px 24px;
   position: sticky;
   top: 0;
   z-index: 20;
   backdrop-filter: blur(14px);
   border-radius: 0 0 24px 24px;
-  margin: 0 -12px;
-  padding-left: calc(12px + 12px);
-  padding-right: calc(12px + 12px);
+  margin: 0;
 }
 
 .brand {
@@ -64,7 +63,24 @@
   height: 2px;
   background: var(--text-h);
   border-radius: 2px;
-  transition: all 200ms ease;
+  transform-origin: center;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease,
+    background-color 220ms ease;
+}
+
+.menu-toggle.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menu-toggle.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .mobile-nav {
@@ -92,6 +108,19 @@
     backdrop-filter: blur(14px);
     padding: 20px;
     border-bottom: 1px solid var(--border-soft);
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    transform-origin: top;
+    pointer-events: none;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+  }
+
+  .mobile-nav.is-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
   }
 
   .mobile-nav a {
@@ -100,7 +129,33 @@
     font-size: 0.92rem;
     font-weight: 500;
     padding: 8px 0;
-    transition: color 180ms ease;
+    transform: translateX(-6px);
+    opacity: 0;
+    transition:
+      color 180ms ease,
+      transform 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .mobile-nav.is-open a {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .mobile-nav.is-open a:nth-child(1) {
+    transition-delay: 40ms;
+  }
+
+  .mobile-nav.is-open a:nth-child(2) {
+    transition-delay: 80ms;
+  }
+
+  .mobile-nav.is-open a:nth-child(3) {
+    transition-delay: 120ms;
+  }
+
+  .mobile-nav.is-open a:nth-child(4) {
+    transition-delay: 160ms;
   }
 
   .mobile-nav a:hover,
@@ -277,6 +332,7 @@
 
 main {
   color: var(--text);
+  padding: 0 20px;
 }
 
 .stats-grid {
@@ -524,8 +580,12 @@ main {
 
 @media (max-width: 640px) {
   .page-shell {
-    width: min(100%, calc(100% - 20px));
+    width: 100%;
     padding-top: 8px;
+  }
+
+  main {
+    padding: 0 12px;
   }
 
   .brand {
