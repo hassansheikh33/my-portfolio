@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 6px 0 20px;
+  padding: 8px 0 24px;
   position: sticky;
   top: 0;
   z-index: 20;
@@ -17,33 +17,91 @@
 }
 
 .brand {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
   text-decoration: none;
   color: var(--text-h);
-  background: var(--panel-strong);
-  border: 1px solid var(--border-strong);
   font-family: var(--heading);
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 28px;
   flex-wrap: wrap;
 }
 
 .nav a {
   color: var(--text);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
   transition: color 180ms ease;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-h);
+  border-radius: 2px;
+  transition: all 200ms ease;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(18, 19, 38, 0.98);
+    backdrop-filter: blur(14px);
+    padding: 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .mobile-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 180ms ease;
+  }
+
+  .mobile-nav a:hover,
+  .mobile-nav a:focus-visible {
+    color: var(--text-h);
+  }
 }
 
 .nav a:hover,
@@ -56,10 +114,12 @@
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
-  gap: 28px;
+  gap: 40px;
   align-items: start;
-  padding: 18px 0 28px;
+  padding: 18px 0 36px;
   min-height: 0;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 12px;
 }
 
 .hero-copy,
@@ -161,16 +221,22 @@
     var(--panel);
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
 }
 
 .profile-card {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
   border-radius: 18px;
   background: var(--surface-soft);
   border: 1px solid var(--border-soft);
+  min-height: 130px;
 }
 
 .avatar {
@@ -190,7 +256,7 @@
 .card-label {
   margin: 0 0 6px;
   color: var(--accent);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-weight: 700;
@@ -198,10 +264,10 @@
 
 .card-value {
   margin: 0;
-  color: var(--text-h);
-  font-size: 0.98rem;
+  color: var(--text);
+  font-size: 0.92rem;
   line-height: 1.5;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 main {
@@ -245,8 +311,10 @@ main {
 }
 
 .section {
-  padding: 28px 0 0;
+  padding: 32px 0 0;
   color: var(--text);
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 12px;
 }
 
 .section-heading {
@@ -281,7 +349,8 @@ main {
 .about-layout p {
   margin: 0;
   color: var(--text);
-  line-height: 1.7;
+  line-height: 1.65;
+  font-size: 0.95rem;
 }
 
 .project-grid {
@@ -374,20 +443,19 @@ main {
 }
 
 @media (max-width: 920px) {
-  .topbar,
+  .topbar {
+    padding-bottom: 18px;
+  }
+
+  .hero,
   .contact-section,
-  .about-section,
-  .hero {
+  .about-section {
     grid-template-columns: 1fr;
   }
 
-  .topbar,
-  .contact-section {
-    display: grid;
-  }
-
   .hero {
-    padding-top: 14px;
+    gap: 24px;
+    padding-bottom: 24px;
   }
 
   .service-grid,
@@ -405,10 +473,44 @@ main {
   }
 }
 
+@media (max-width: 768px) {
+  .topbar {
+    position: relative;
+    padding: 10px 0 16px;
+  }
+
+  .hero {
+    gap: 20px;
+    padding: 16px 0 24px;
+  }
+
+  .hero-panel {
+    padding: 14px;
+  }
+
+  .profile-card {
+    min-height: 120px;
+    padding: 12px;
+  }
+
+  .stats-grid article {
+    padding: 14px 12px;
+    font-size: 0.92rem;
+  }
+
+  .stats-grid strong {
+    font-size: 1.3rem;
+  }
+}
+
 @media (max-width: 640px) {
   .page-shell {
     width: min(100%, calc(100% - 20px));
     padding-top: 8px;
+  }
+
+  .brand {
+    font-size: 0.9rem;
   }
 
   .hero-panel,
@@ -427,11 +529,17 @@ main {
   }
 
   .topbar {
-    padding-bottom: 14px;
+    padding-bottom: 12px;
   }
 
-  .nav a {
-    font-size: 0.92rem;
+  .mobile-nav {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .mobile-nav a {
+    font-size: 0.9rem;
+    padding: 6px 0;
   }
 
   .hero-actions,
@@ -441,9 +549,11 @@ main {
 
   .button {
     width: 100%;
+    font-size: 0.92rem;
   }
 
   .profile-card {
+    flex-direction: column;
     align-items: flex-start;
   }
 }
