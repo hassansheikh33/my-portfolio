@@ -1,79 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import "tailwindcss";
 
-:root {
-  --text: #7d7790;
-  --text-h: #f7f2ff;
-  --bg: #0f1020;
-  --panel: rgba(18, 19, 38, 0.82);
-  --panel-strong: rgba(255, 255, 255, 0.06);
-  --surface-soft: rgba(255, 255, 255, 0.035);
-  --border-soft: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --accent: #f9a66c;
-  --accent-strong: #ff6f59;
-  --shadow: 0 26px 70px rgba(0, 0, 0, 0.35);
-  --sans: 'Manrope', sans-serif;
-  --heading: 'Space Grotesk', sans-serif;
+@layer base {
+  :root {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    color: #9ba4ab;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color-scheme: dark;
+  }
 
-  font: 18px/1.55 var(--sans);
-  color-scheme: dark;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(249, 166, 108, 0.16), transparent 28%),
-    radial-gradient(circle at top right, rgba(255, 111, 89, 0.14), transparent 24%),
-    linear-gradient(180deg, #121327 0%, #0f1020 45%, #090a14 100%);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(249, 166, 108, 0.16), transparent 28%),
+      radial-gradient(circle at top right, rgba(255, 111, 89, 0.14), transparent 24%),
+      linear-gradient(180deg, #121327 0%, #0f1020 45%, #090a14 100%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 85%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  ::selection {
+    color: #120e18;
+    background: rgba(249, 166, 108, 0.85);
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.28;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 85%);
-}
-
-a {
-  color: inherit;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-#root {
-  min-height: 100vh;
-}
-
-h1,
-h2,
-h3,
-p {
-  margin-top: 0;
-}
-
-::selection {
-  color: #120e18;
-  background: rgba(249, 166, 108, 0.85);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

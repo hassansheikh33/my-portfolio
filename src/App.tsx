@@ -1,4 +1,3 @@
-import './App.css'
 import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
 import Hero from './components/Hero'
@@ -10,6 +9,9 @@ const services = [
   'Full-stack web apps with React, Node.js, and Express',
   'REST APIs, authentication, and backend workflows',
   'MongoDB and SQL data modeling for production apps',
+  'Responsive UI design with clean, modern aesthetics',
+  'Database optimization and API performance',
+  'Deployment, testing, and code quality assurance',
 ]
 
 const projects = [
@@ -48,9 +50,9 @@ const skills = [
 
 function App() {
   return (
-    <div className="page-shell">
+    <div className="mx-auto w-full max-w-[1120px] pb-10 pt-4">
       <Navigation brand="Muhammad Hassan Bilal" />
-      <main>
+      <main className="px-5 text-[#9ba4ab] max-[640px]:px-3">
         <Hero
           designation="Full-stack web developer"
           title="I build modern web products with clean code and clear user flow."
