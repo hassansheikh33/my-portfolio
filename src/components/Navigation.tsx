@@ -63,10 +63,10 @@ function Navigation({ brand }: NavigationProps) {
       </button>
 
       <nav
-        className={`pointer-events-none absolute left-0 right-0 top-full hidden flex-col gap-3 border-b border-white/10 bg-[rgba(18,19,38,0.98)] p-5 opacity-0 backdrop-blur-[14px] transition-all duration-200 max-[768px]:flex ${
+        className={`absolute left-0 right-0 top-full z-30 hidden flex-col gap-3 border-b border-white/10 bg-[rgba(18,19,38,0.98)] p-5 opacity-0 backdrop-blur-[14px] transition-all duration-200 max-[768px]:flex ${
           isOpen
             ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
-            : '-translate-y-2 scale-[0.98]'
+            : 'pointer-events-none -translate-y-2 scale-[0.98]'
         }`}
         aria-label="Mobile navigation"
       >
