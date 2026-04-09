@@ -8,7 +8,7 @@ type ProjectsSectionProps = {
   projects: Project[]
 }
 
-function ProjectsSection({ projects }: ProjectsSectionProps) {
+export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
   return (
     <section className="mb-3 border-b border-white/10 py-[30px]" id="work">
       <div className="mb-5 grid gap-3 text-[#9ba4ab]">
@@ -42,4 +42,3 @@ function ProjectsSection({ projects }: ProjectsSectionProps) {
   )
 }
 
-export default ProjectsSection

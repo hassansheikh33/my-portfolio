@@ -4,7 +4,7 @@ type NavigationProps = {
   brand: string
 }
 
-function Navigation({ brand }: NavigationProps) {
+export const Navigation = ({ brand }: NavigationProps) => {
   const { isOpen, toggle, close } = useNavbarMenu()
 
   return (
@@ -111,4 +111,3 @@ function Navigation({ brand }: NavigationProps) {
   )
 }
 
-export default Navigation

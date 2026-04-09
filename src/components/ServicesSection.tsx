@@ -2,7 +2,7 @@ type ServicesSectionProps = {
   services: string[]
 }
 
-function ServicesSection({ services }: ServicesSectionProps) {
+export const ServicesSection = ({ services }: ServicesSectionProps) => {
   return (
     <section className="mb-3 border-b border-white/10 py-[30px]" id="services">
       <div className="mb-5 grid gap-3 text-[#9ba4ab]">
@@ -27,4 +27,3 @@ function ServicesSection({ services }: ServicesSectionProps) {
   )
 }
 
-export default ServicesSection

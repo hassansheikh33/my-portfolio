@@ -1,9 +1,9 @@
-import AboutSection from './components/AboutSection'
-import ContactSection from './components/ContactSection'
-import Hero from './components/Hero'
-import Navigation from './components/Navigation'
-import ProjectsSection from './components/ProjectsSection'
-import ServicesSection from './components/ServicesSection'
+import { AboutSection } from './components/AboutSection'
+import { ContactSection } from './components/ContactSection'
+import { Hero } from './components/Hero'
+import { Navigation } from './components/Navigation'
+import { ProjectsSection } from './components/ProjectsSection'
+import { ServicesSection } from './components/ServicesSection'
 
 const services = [
   'Full-stack web apps with React, Node.js, and Express',
@@ -48,7 +48,7 @@ const skills = [
   'Responsive design',
 ]
 
-function App() {
+export const App = () => {
   return (
     <div className="mx-auto w-full max-w-[1120px] pb-10 pt-4">
       <Navigation brand="Muhammad Hassan Bilal" />
@@ -76,4 +76,3 @@ function App() {
   )
 }
 
-export default App

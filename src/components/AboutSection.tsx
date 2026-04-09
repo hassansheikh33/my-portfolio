@@ -3,7 +3,7 @@ type AboutSectionProps = {
   skills: string[]
 }
 
-function AboutSection({ description, skills }: AboutSectionProps) {
+export const AboutSection = ({ description, skills }: AboutSectionProps) => {
   return (
     <section
       className="mb-3 grid items-start gap-[22px] border-b border-white/10 py-[30px] max-[920px]:grid-cols-1 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]"
@@ -34,4 +34,3 @@ function AboutSection({ description, skills }: AboutSectionProps) {
   )
 }
 
-export default AboutSection

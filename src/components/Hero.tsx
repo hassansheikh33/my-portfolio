@@ -11,7 +11,7 @@ type HeroProps = {
   stats: HeroStats[]
 }
 
-function Hero({ designation, title, summary, name, stats }: HeroProps) {
+export const Hero = ({ designation, title, summary, name, stats }: HeroProps) => {
   return (
     <section
       className="mb-3 grid items-start gap-10 border-b border-white/10 py-6 max-[920px]:grid-cols-1 max-[920px]:gap-6 max-[920px]:pb-6 max-[768px]:gap-5 max-[768px]:py-4 lg:grid-cols-2"
@@ -78,4 +78,3 @@ function Hero({ designation, title, summary, name, stats }: HeroProps) {
   )
 }
 
-export default Hero
