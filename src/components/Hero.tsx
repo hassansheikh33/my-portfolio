@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from 'react'
+import { animate, motion, useInView } from 'framer-motion'
+
 type HeroStats = {
   value: string
   label: string
@@ -9,6 +12,62 @@ type HeroProps = {
   summary: string
   name: string
   stats: HeroStats[]
+}
+
+const statPattern = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/
+
+type AnimatedStatValueProps = {
+  value: string
+}
+
+const AnimatedStatValue = ({ value }: AnimatedStatValueProps) => {
+  const strongRef = useRef<HTMLElement | null>(null)
+  const isInView = useInView(strongRef, { once: true, amount: 0.8 })
+  const [displayValue, setDisplayValue] = useState(value)
+
+  useEffect(() => {
+    const parsedValue = value.match(statPattern)
+
+    if (!parsedValue) {
+      setDisplayValue(value)
+      return
+    }
+
+    const [, prefix, numericText, suffix] = parsedValue
+    const target = Number(numericText)
+    const decimalPlaces = numericText.includes('.') ? numericText.split('.')[1].length : 0
+
+    if (!isInView) {
+      setDisplayValue(`${prefix}${decimalPlaces > 0 ? '0.0' : '0'}${suffix}`)
+      return
+    }
+
+    const controls = animate(0, target, {
+      duration: 1.8,
+      ease: 'easeOut',
+      onUpdate: (latest) => {
+        const rounded = decimalPlaces > 0 ? latest.toFixed(decimalPlaces) : Math.round(latest).toString()
+        setDisplayValue(`${prefix}${rounded}${suffix}`)
+      },
+    })
+
+    return () => {
+      controls.stop()
+    }
+  }, [isInView, value])
+
+  return (
+    <motion.strong
+      className="block text-[1.45rem] tracking-[-0.05em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif] max-[768px]:text-[1.3rem]"
+      ref={strongRef}
+      initial={{ opacity: 0.45, scale: 0.96 }}
+      whileInView={{ opacity: 1, scale: [1, 1.08, 1] }}
+      viewport={{ once: true, amount: 0.8 }}
+      transition={{ duration: 0.85, ease: 'easeOut' }}
+    >
+      {displayValue}
+    </motion.strong>
+  )
 }
 
 export const Hero = ({ designation, title, summary, name, stats }: HeroProps) => {
@@ -59,18 +118,29 @@ export const Hero = ({ designation, title, summary, name, stats }: HeroProps) =>
           </div>
         </div>
         <div className="mt-4 grid gap-[14px] max-[920px]:grid-cols-1 sm:grid-cols-3">
-          {stats.map((stat) => (
-            <article
+          {stats.map((stat, index) => (
+            <motion.article
               className="rounded-[18px] border border-white/10 bg-white/[0.035] px-[14px] py-4 max-[768px]:px-3 max-[768px]:py-[14px]"
               key={stat.label}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                borderColor: 'rgba(249, 166, 108, 0.36)',
+                boxShadow: [
+                  '0 0 0 rgba(249,166,108,0)',
+                  '0 0 24px rgba(249,166,108,0.2)',
+                  '0 0 0 rgba(249,166,108,0)',
+                ],
+              }}
+              viewport={{ once: true, amount: 0.75 }}
+              transition={{ duration: 0.9, delay: index * 0.14, ease: 'easeOut' }}
             >
-              <strong className="block text-[1.45rem] tracking-[-0.05em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif] max-[768px]:text-[1.3rem]">
-                {stat.value}
-              </strong>
+              <AnimatedStatValue value={stat.value} />
               <span className="mt-1.5 block text-[0.92rem] leading-[1.45] text-[#9ba4ab]">
                 {stat.label}
               </span>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>
