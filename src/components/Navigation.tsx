@@ -1,4 +1,5 @@
 import { useNavbarMenu } from '../hooks/navbar'
+import CodeIcon from '@mui/icons-material/Code';
 
 type NavigationProps = {
   brand: string
@@ -10,9 +11,10 @@ export const Navigation = ({ brand }: NavigationProps) => {
   return (
     <header className="relative sticky top-0 z-20 mb-2 flex items-center justify-between gap-4 rounded-b-[24px] px-5 pb-6 pt-2 backdrop-blur-[14px] max-[768px]:rounded-none max-[768px]:px-0 max-[768px]:pb-4 max-[768px]:pt-2">
       <a
-        className="whitespace-nowrap pl-2 text-[1.1rem] font-bold tracking-[0.08em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif] max-[640px]:text-[0.9rem]"
+        className="whitespace-nowrap pl-2 text-[1.1rem] font-bold tracking-[0.08em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif] max-[640px]:text-[0.9rem] flex items-center"
         href="#home"
       >
+        <CodeIcon className="mr-2 h-5 w-5" />
         {brand}
       </a>
       <nav

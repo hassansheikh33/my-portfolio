@@ -4,6 +4,7 @@ import { Hero } from './components/Hero'
 import { Navigation } from './components/Navigation'
 import { ProjectsSection } from './components/ProjectsSection'
 import { ServicesSection } from './components/ServicesSection'
+import { Footer } from './components/Footer'
 
 const services = [
   'Full-stack web apps with React, Node.js, and Express',
@@ -50,14 +51,14 @@ const skills = [
 
 export const App = () => {
   return (
-    <div className="mx-auto w-full max-w-[1120px] pb-10 pt-4">
+    <div className="mx-auto w-full max-w-[1120px] pt-4">
       <Navigation brand="Muhammad Hassan Bilal" />
       <main className="px-5 text-[#9ba4ab] max-[640px]:px-3">
         <Hero
           designation="Full-stack web developer"
           title="I build modern web products with clean code and clear user flow."
           summary="Short, modern interfaces backed by reliable APIs and thoughtful UX."
-          name="MH"
+          name="MHB"
           stats={[
             { value: '2.5+', label: 'years building web apps' },
             { value: '30+', label: 'pages and products shipped' },
@@ -72,6 +73,7 @@ export const App = () => {
         />
         <ContactSection />
       </main>
+      <Footer />
     </div>
   )
 }
