@@ -1,18 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion'
+import { PROJECTS } from '../content'
+import { SectionHeading } from './SectionHeading'
 
-type Project = {
-  name: string
-  type: string
-  description: string
-}
-
-type ProjectsSectionProps = {
-  projects: Project[]
-}
-
-export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
-  const scrollingProjects = [...projects, ...projects]
+export const ProjectsSection = () => {
+  const projects = PROJECTS
+  const scrollingProjects = useMemo(() => [...projects, ...projects], [projects])
   const trackRef = useRef<HTMLDivElement | null>(null)
   const x = useMotionValue(0)
   const [halfTrackWidth, setHalfTrackWidth] = useState(0)
@@ -60,18 +53,15 @@ export const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
       transition={{ duration: 0.55, ease: 'easeOut' }}
     >
       <motion.div
-        className="mb-5 grid gap-3 text-[#9ba4ab]"
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
       >
-        <p className="inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-[0.22em] text-[#f9a66c]">
-          Selected work
-        </p>
-        <h2 className="max-w-[14ch] text-[clamp(1.7rem,3.2vw,2.6rem)] leading-[0.95] tracking-[-0.05em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif]">
-          Projects shaped to balance product goals, speed, and clarity.
-        </h2>
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Projects shaped to balance product goals, speed, and clarity."
+        />
       </motion.div>
       <div className="overflow-hidden">
         <motion.div

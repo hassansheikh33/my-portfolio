@@ -1,6 +1,4 @@
-'use client'
-
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { useForm } from '@formspree/react'
 import {
   TextField,
@@ -10,6 +8,7 @@ import {
 } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import toast, { Toaster } from 'react-hot-toast'
+import { SectionHeading } from './SectionHeading'
 
 const textFieldSx = {
   '& .MuiOutlinedInput-root': {
@@ -52,18 +51,37 @@ const textFieldSx = {
   },
 }
 
+const fields = [
+  {
+    label: 'Name',
+    name: 'name',
+    placeholder: 'Your name',
+  },
+  {
+    label: 'Email',
+    name: 'email',
+    type: 'email',
+    placeholder: 'your.email@example.com',
+  },
+  {
+    label: 'Message',
+    name: 'message',
+    placeholder: 'Tell me about your project...',
+    multiline: true,
+    rows: 4,
+  },
+]
+
 export const ContactSection = () => {
-  const [state, handleSubmit] = useForm('mgopbjqd') // Replace with your Formspree form ID
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const formRef = useRef<HTMLFormElement>(null);
+  const [state, handleSubmit] = useForm('mgopbjqd')
+  const formRef = useRef<HTMLFormElement>(null)
+  const isSubmitting = state.submitting
   
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubmitting(true)
 
     try {
       await handleSubmit(e)
-      // Show success message and reset form after submission completes
       toast.success('Message sent successfully! I will get back to you soon.')
       if (formRef.current) {
         formRef.current.reset()
@@ -72,8 +90,6 @@ export const ContactSection = () => {
       const errorMessage = error instanceof Error ? error.message : 'Failed to send message. Please try again.'
       toast.error(errorMessage)
       console.error('Error:', error)
-    } finally {
-      setIsSubmitting(false)
     }
   }
 
@@ -85,12 +101,11 @@ export const ContactSection = () => {
         id="contact"
       >
         <div className="mb-8">
-          <p className="mb-3 inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-[0.22em] text-[#f9a66c]">
-            Contact
-          </p>
-          <h2 className="max-w-[10ch] text-[clamp(1.7rem,3.2vw,2.6rem)] leading-[0.95] tracking-[-0.05em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif]">
-            Have a project in mind?
-          </h2>
+          <SectionHeading
+            className="mb-0"
+            eyebrow="Contact"
+            title="Have a project in mind?"
+          />
           <p className="mt-3 text-sm text-[#9ba4ab]">
             Get in touch and let me know what you need. I'd love to hear about your project.
           </p>
@@ -98,54 +113,27 @@ export const ContactSection = () => {
 
         <form onSubmit={onSubmit} ref={formRef}>
           <Box sx={{ display: 'grid', gap: 2.5, width: '100%' }}>
-            {/* Name Field */}
-            <TextField
-              label="Name"
-              name="name"
-              required
-              fullWidth
-              placeholder="Your name"
-              disabled={isSubmitting || state.submitting}
-              variant="outlined"
-              sx={textFieldSx}
-            />
+            {fields.map((field) => (
+              <TextField
+                label={field.label}
+                name={field.name}
+                required
+                fullWidth
+                disabled={isSubmitting}
+                variant="outlined"
+                sx={textFieldSx}
+                key={field.name}
+                {...field}
+              />
+            ))}
 
-            {/* Email Field */}
-            <TextField
-              label="Email"
-              name="email"
-              type="email"
-              required
-              fullWidth
-              placeholder="your.email@example.com"
-              disabled={isSubmitting || state.submitting}
-              variant="outlined"
-              sx={textFieldSx}
-            />
-
-            {/* Message Field */}
-            <TextField
-              label="Message"
-              name="message"
-              required
-              fullWidth
-              multiline
-              rows={4}
-              placeholder="Tell me about your project..."
-              disabled={isSubmitting || state.submitting}
-              variant="outlined"
-              sx={textFieldSx}
-            />
-
-
-            {/* Submit Button */}
             <Button
               type="submit"
               variant="contained"
-              disabled={isSubmitting || state.submitting}
+              disabled={isSubmitting}
               fullWidth
               endIcon={
-                isSubmitting || state.submitting ? (
+                isSubmitting ? (
                   <CircularProgress size={20} />
                 ) : (
                   <SendIcon />
@@ -172,7 +160,7 @@ export const ContactSection = () => {
                 transition: 'all 0.2s ease',
               }}
             >
-              {isSubmitting || state.submitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>
           </Box>
         </form>
