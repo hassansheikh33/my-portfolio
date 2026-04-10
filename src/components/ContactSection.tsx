@@ -114,14 +114,12 @@ export const ContactSection = () => {
           <Box sx={{ display: "grid", gap: 2.5, width: "100%" }}>
             {fields.map((field) => (
               <TextField
-                label={field.label}
-                name={field.name}
+                key={field.name}
                 required
                 fullWidth
                 disabled={isSubmitting}
                 variant="outlined"
                 sx={textFieldSx}
-                key={field.name}
                 {...field}
               />
             ))}
