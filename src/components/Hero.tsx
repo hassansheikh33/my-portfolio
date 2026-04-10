@@ -1,54 +1,54 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { animate, motion, useInView } from 'framer-motion'
-import { HERO_CONTENT, HERO_STATS } from '../content'
+import { useEffect, useMemo, useRef, useState } from "react";
+import { animate, motion, useInView } from "framer-motion";
+import { HERO_CONTENT, HERO_STATS } from "../content";
 
-const statPattern = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/
+const statPattern = /^([^\d]*)(\d+(?:\.\d+)?)(.*)$/;
 
 const heroCtaLinks = [
   {
-    href: '#work',
-    label: 'View projects',
+    href: "#work",
+    label: "View projects",
     className:
-      'inline-flex min-h-12 items-center justify-center rounded-full border border-transparent bg-gradient-to-br from-[#f9a66c] to-[#ff6f59] px-5 font-bold text-[#f8f5ff] shadow-[0_26px_70px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-px hover:text-[#f8f5ff] max-[640px]:w-full max-[640px]:text-[0.92rem]',
+      "inline-flex min-h-12 items-center justify-center rounded-full border border-transparent bg-gradient-to-br from-[#f9a66c] to-[#ff6f59] px-5 font-bold text-[#f8f5ff] shadow-[0_26px_70px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-px hover:text-[#f8f5ff] max-[640px]:w-full max-[640px]:text-[0.92rem]",
   },
   {
-    href: '#contact',
-    label: 'Start a project',
+    href: "#contact",
+    label: "Start a project",
     className:
-      'inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/[0.035] px-5 font-bold text-[#f7f2ff] transition-all duration-200 hover:-translate-y-px hover:text-[#f7f2ff] max-[640px]:w-full max-[640px]:text-[0.92rem]',
+      "inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/[0.035] px-5 font-bold text-[#f7f2ff] transition-all duration-200 hover:-translate-y-px hover:text-[#f7f2ff] max-[640px]:w-full max-[640px]:text-[0.92rem]",
   },
-]
+];
 
 type AnimatedStatValueProps = {
-  value: string
-}
+  value: string;
+};
 
 type TypewriterTextProps = {
-  text: string
-  speed?: number
-}
+  text: string;
+  speed?: number;
+};
 
 const TypewriterText = ({ text, speed = 34 }: TypewriterTextProps) => {
-  const [visibleChars, setVisibleChars] = useState(0)
-  const restartDelay = 5000
+  const [visibleChars, setVisibleChars] = useState(0);
+  const restartDelay = 5000;
 
   useEffect(() => {
     const timer = window.setTimeout(
       () => {
         if (visibleChars >= text.length) {
-          setVisibleChars(0)
-          return
+          setVisibleChars(0);
+          return;
         }
 
-        setVisibleChars((current) => current + 1)
+        setVisibleChars((current) => current + 1);
       },
       visibleChars >= text.length ? restartDelay : speed,
-    )
+    );
 
     return () => {
-      window.clearTimeout(timer)
-    }
-  }, [visibleChars, text.length, speed])
+      window.clearTimeout(timer);
+    };
+  }, [visibleChars, text.length, speed]);
 
   return (
     <span className="relative inline-block align-top">
@@ -58,61 +58,64 @@ const TypewriterText = ({ text, speed = 34 }: TypewriterTextProps) => {
         <motion.span
           animate={{ opacity: [1, 0, 1] }}
           aria-hidden="true"
-          transition={{ duration: 0.9, ease: 'linear', repeat: Infinity }}
+          transition={{ duration: 0.9, ease: "linear", repeat: Infinity }}
         >
           |
         </motion.span>
       </span>
     </span>
-  )
-}
+  );
+};
 
 const AnimatedStatValue = ({ value }: AnimatedStatValueProps) => {
-  const strongRef = useRef<HTMLElement | null>(null)
-  const numberRef = useRef<HTMLSpanElement | null>(null)
-  const isInView = useInView(strongRef, { once: true, amount: 0.8 })
-  const parsedValue = useMemo(() => value.match(statPattern), [value])
+  const strongRef = useRef<HTMLElement | null>(null);
+  const numberRef = useRef<HTMLSpanElement | null>(null);
+  const isInView = useInView(strongRef, { once: true, amount: 0.8 });
+  const parsedValue = useMemo(() => value.match(statPattern), [value]);
   const decimals = useMemo(
     () =>
-      parsedValue && parsedValue[2].includes('.') ? parsedValue[2].split('.')[1].length : 0,
+      parsedValue && parsedValue[2].includes(".")
+        ? parsedValue[2].split(".")[1].length
+        : 0,
     [parsedValue],
-  )
+  );
 
   useEffect(() => {
-    if (!numberRef.current) return
+    if (!numberRef.current) return;
 
     if (!parsedValue) {
-      numberRef.current.textContent = value
-      return
+      numberRef.current.textContent = value;
+      return;
     }
 
-    const prefix = parsedValue[1]
-    const target = Number(parsedValue[2])
-    const suffix = parsedValue[3]
+    const prefix = parsedValue[1];
+    const target = Number(parsedValue[2]);
+    const suffix = parsedValue[3];
 
     const formatValue = (latest: number) => {
-      const rounded = decimals > 0 ? latest.toFixed(decimals) : Math.round(latest).toString()
-      return `${prefix}${rounded}${suffix}`
-    }
+      const rounded =
+        decimals > 0 ? latest.toFixed(decimals) : Math.round(latest).toString();
+      return `${prefix}${rounded}${suffix}`;
+    };
 
-    numberRef.current.textContent = formatValue(0)
+    numberRef.current.textContent = formatValue(0);
 
-    if (!isInView) return
+    if (!isInView) return;
 
     const controls = animate(0, target, {
       duration: 1.8,
-      ease: 'easeOut',
+      ease: "easeOut",
       onUpdate: (latest) => {
         if (numberRef.current) {
-          numberRef.current.textContent = formatValue(latest)
+          numberRef.current.textContent = formatValue(latest);
         }
       },
-    })
+    });
 
     return () => {
-      controls.stop()
-    }
-  }, [decimals, isInView, parsedValue, value])
+      controls.stop();
+    };
+  }, [decimals, isInView, parsedValue, value]);
 
   return (
     <motion.strong
@@ -121,12 +124,16 @@ const AnimatedStatValue = ({ value }: AnimatedStatValueProps) => {
       initial={{ opacity: 0.45, scale: 0.96 }}
       whileInView={{ opacity: 1, scale: [1, 1.08, 1] }}
       viewport={{ once: true, amount: 0.8 }}
-      transition={{ duration: 0.85, ease: 'easeOut' }}
+      transition={{ duration: 0.85, ease: "easeOut" }}
     >
-      <span ref={numberRef}>{parsedValue ? `${parsedValue[1]}${decimals > 0 ? '0.0' : '0'}${parsedValue[3]}` : value}</span>
+      <span ref={numberRef}>
+        {parsedValue
+          ? `${parsedValue[1]}${decimals > 0 ? "0.0" : "0"}${parsedValue[3]}`
+          : value}
+      </span>
     </motion.strong>
-  )
-}
+  );
+};
 
 export const Hero = () => {
   return (
@@ -141,7 +148,9 @@ export const Hero = () => {
         <h1 className="max-w-[12ch] text-[clamp(2.4rem,5vw,4.3rem)] leading-[0.95] tracking-[-0.05em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif]">
           <TypewriterText key={HERO_CONTENT.title} text={HERO_CONTENT.title} />
         </h1>
-        <p className="mt-4 max-w-[38ch] text-base leading-[1.55] text-[#9ba4ab]">{HERO_CONTENT.summary}</p>
+        <p className="mt-4 max-w-[38ch] text-base leading-[1.55] text-[#9ba4ab]">
+          {HERO_CONTENT.summary}
+        </p>
         <div className="mt-7 flex flex-wrap gap-3 max-[640px]:items-stretch">
           {heroCtaLinks.map((link) => (
             <a className={link.className} href={link.href} key={link.href}>
@@ -177,15 +186,19 @@ export const Hero = () => {
               whileInView={{
                 opacity: 1,
                 y: 0,
-                borderColor: 'rgba(249, 166, 108, 0.36)',
+                borderColor: "rgba(249, 166, 108, 0.36)",
                 boxShadow: [
-                  '0 0 0 rgba(249,166,108,0)',
-                  '0 0 24px rgba(249,166,108,0.2)',
-                  '0 0 0 rgba(249,166,108,0)',
+                  "0 0 0 rgba(249,166,108,0)",
+                  "0 0 24px rgba(249,166,108,0.2)",
+                  "0 0 0 rgba(249,166,108,0)",
                 ],
               }}
               viewport={{ once: true, amount: 0.75 }}
-              transition={{ duration: 0.9, delay: index * 0.14, ease: 'easeOut' }}
+              transition={{
+                duration: 0.9,
+                delay: index * 0.14,
+                ease: "easeOut",
+              }}
             >
               <AnimatedStatValue value={stat.value} />
               <span className="mt-1.5 block text-[0.92rem] leading-[1.45] text-[#9ba4ab]">
@@ -196,6 +209,5 @@ export const Hero = () => {
         </div>
       </div>
     </section>
-  )
-}
-
+  );
+};

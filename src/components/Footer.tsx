@@ -1,37 +1,37 @@
-import GitHubIcon from '@mui/icons-material/GitHub'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import CodeOffIcon from '@mui/icons-material/CodeOff'
-import { SiFiverr, SiUpwork } from 'react-icons/si'
-import type { ElementType } from 'react'
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import CodeOffIcon from "@mui/icons-material/CodeOff";
+import { SiFiverr, SiUpwork } from "react-icons/si";
+import type { ElementType } from "react";
 
 type SocialLink = {
-  href: string
-  label: string
-  icon: ElementType
-}
+  href: string;
+  label: string;
+  icon: ElementType;
+};
 
 const socialLinks: SocialLink[] = [
   {
-    href: 'https://github.com/hassansheikh33',
-    label: 'GitHub',
+    href: "https://github.com/hassansheikh33",
+    label: "GitHub",
     icon: GitHubIcon,
   },
   {
-    href: 'https://linkedin.com/in/hassan-bilal-dev',
-    label: 'LinkedIn',
+    href: "https://linkedin.com/in/hassan-bilal-dev",
+    label: "LinkedIn",
     icon: LinkedInIcon,
   },
   {
-    href: 'https://www.upwork.com/freelancers/~01093f45f2308fd7d3?mp_source=share',
-    label: 'Upwork',
+    href: "https://www.upwork.com/freelancers/~01093f45f2308fd7d3?mp_source=share",
+    label: "Upwork",
     icon: SiUpwork,
   },
   {
-    href: 'https://www.fiverr.com/s/XL23K6m',
-    label: 'Fiverr',
+    href: "https://www.fiverr.com/s/XL23K6m",
+    label: "Fiverr",
     icon: SiFiverr,
   },
-]
+];
 
 export const Footer = () => {
   return (
@@ -48,7 +48,7 @@ export const Footer = () => {
 
         <div className="flex items-center gap-6">
           {socialLinks.map((link) => {
-            const Icon = link.icon
+            const Icon = link.icon;
             return (
               <a
                 href={link.href}
@@ -60,7 +60,7 @@ export const Footer = () => {
               >
                 <Icon className="h-5 w-5 transition-colors duration-200 hover:text-[#f9a66c]" />
               </a>
-            )
+            );
           })}
         </div>
       </div>
@@ -70,5 +70,5 @@ export const Footer = () => {
         </p>
       </div>
     </footer>
-  )
-}
+  );
+};

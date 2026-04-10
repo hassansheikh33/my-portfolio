@@ -1,10 +1,10 @@
-import { AboutSection } from './components/AboutSection'
-import { ContactSection } from './components/ContactSection'
-import { Hero } from './components/Hero'
-import { Navigation } from './components/Navigation'
-import { ProjectsSection } from './components/ProjectsSection'
-import { ServicesSection } from './components/ServicesSection'
-import { Footer } from './components/Footer'
+import { AboutSection } from "./components/AboutSection";
+import { ContactSection } from "./components/ContactSection";
+import { Hero } from "./components/Hero";
+import { Navigation } from "./components/Navigation";
+import { ProjectsSection } from "./components/ProjectsSection";
+import { ServicesSection } from "./components/ServicesSection";
+import { Footer } from "./components/Footer";
 
 export const App = () => {
   return (
@@ -19,6 +19,5 @@ export const App = () => {
       </main>
       <Footer />
     </div>
-  )
-}
-
+  );
+};

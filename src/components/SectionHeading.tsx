@@ -1,10 +1,14 @@
 type SectionHeadingProps = {
-  eyebrow: string
-  title: string
-  className?: string
-}
+  eyebrow: string;
+  title: string;
+  className?: string;
+};
 
-export const SectionHeading = ({ eyebrow, title, className = 'mb-5' }: SectionHeadingProps) => {
+export const SectionHeading = ({
+  eyebrow,
+  title,
+  className = "mb-5",
+}: SectionHeadingProps) => {
   return (
     <div className={`${className} grid gap-3 text-[#9ba4ab]`}>
       <p className="inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-[0.22em] text-[#f9a66c]">
@@ -14,5 +18,5 @@ export const SectionHeading = ({ eyebrow, title, className = 'mb-5' }: SectionHe
         {title}
       </h2>
     </div>
-  )
-}
+  );
+};

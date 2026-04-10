@@ -1,97 +1,95 @@
-import { useRef } from 'react'
-import { useForm } from '@formspree/react'
-import {
-  TextField,
-  Button,
-  Box,
-  CircularProgress,
-} from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import toast, { Toaster } from 'react-hot-toast'
-import { SectionHeading } from './SectionHeading'
+import { useRef } from "react";
+import { useForm } from "@formspree/react";
+import { TextField, Button, Box, CircularProgress } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import toast, { Toaster } from "react-hot-toast";
+import { SectionHeading } from "./SectionHeading";
 
 const textFieldSx = {
-  '& .MuiOutlinedInput-root': {
-    color: '#f7f2ff',
-    '& fieldset': {
-      borderColor: '#f9a66c',
+  "& .MuiOutlinedInput-root": {
+    color: "#f7f2ff",
+    "& fieldset": {
+      borderColor: "#f9a66c",
     },
-    '&:hover fieldset': {
-      borderColor: '#ff6f59',
+    "&:hover fieldset": {
+      borderColor: "#ff6f59",
     },
-    '&.Mui-focused fieldset': {
-      borderColor: '#ff6f59',
+    "&.Mui-focused fieldset": {
+      borderColor: "#ff6f59",
     },
-    '&.Mui-disabled': {
-      backgroundColor: 'rgba(249, 166, 108, 0.08)',
-      '& fieldset': {
-        borderColor: 'rgba(249, 166, 108, 0.4)',
+    "&.Mui-disabled": {
+      backgroundColor: "rgba(249, 166, 108, 0.08)",
+      "& fieldset": {
+        borderColor: "rgba(249, 166, 108, 0.4)",
       },
     },
-    '&.Mui-disabled .MuiOutlinedInput-input': {
-      color: 'rgba(249, 166, 108, 0.6)',
-      WebkitTextFillColor: 'rgba(249, 166, 108, 0.6)',
+    "&.Mui-disabled .MuiOutlinedInput-input": {
+      color: "rgba(249, 166, 108, 0.6)",
+      WebkitTextFillColor: "rgba(249, 166, 108, 0.6)",
     },
   },
-  '& .MuiOutlinedInput-input::placeholder': {
-    color: '#9ba4ab',
+  "& .MuiOutlinedInput-input::placeholder": {
+    color: "#9ba4ab",
     opacity: 0.7,
   },
-  '& .MuiInputBase-input': {
-    color: '#f7f2ff',
+  "& .MuiInputBase-input": {
+    color: "#f7f2ff",
   },
-  '& .MuiInputLabel-root': {
-    color: '#9ba4ab',
-    '&.Mui-focused': {
-      color: '#ff6f59',
+  "& .MuiInputLabel-root": {
+    color: "#9ba4ab",
+    "&.Mui-focused": {
+      color: "#ff6f59",
     },
-    '&.Mui-disabled': {
-      color: 'rgba(249, 166, 108, 0.5)',
+    "&.Mui-disabled": {
+      color: "rgba(249, 166, 108, 0.5)",
     },
   },
-}
+};
 
 const fields = [
   {
-    label: 'Name',
-    name: 'name',
-    placeholder: 'Your name',
+    label: "Name",
+    name: "name",
+    placeholder: "Your name",
   },
   {
-    label: 'Email',
-    name: 'email',
-    type: 'email',
-    placeholder: 'your.email@example.com',
+    label: "Email",
+    name: "email",
+    type: "email",
+    placeholder: "your.email@example.com",
   },
   {
-    label: 'Message',
-    name: 'message',
-    placeholder: 'Tell me about your project...',
+    label: "Message",
+    name: "message",
+    placeholder: "Tell me about your project...",
     multiline: true,
     rows: 4,
   },
-]
+];
 
 export const ContactSection = () => {
-  const [state, handleSubmit] = useForm('mgopbjqd')
-  const formRef = useRef<HTMLFormElement>(null)
-  const isSubmitting = state.submitting
-  
+  const [state, handleSubmit] = useForm("mgopbjqd");
+  const formRef = useRef<HTMLFormElement>(null);
+  const isSubmitting = state.submitting;
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-      await handleSubmit(e)
-      toast.success('Message sent successfully! I will get back to you soon.')
+      await handleSubmit(e);
+      toast.success("Message sent successfully! I will get back to you soon.");
       if (formRef.current) {
-        formRef.current.reset()
+        formRef.current.reset();
       }
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to send message. Please try again.'
-      toast.error(errorMessage)
-      console.error('Error:', error)
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to send message. Please try again.";
+      toast.error(errorMessage);
+      console.error("Error:", error);
     }
-  }
+  };
 
   return (
     <>
@@ -107,12 +105,13 @@ export const ContactSection = () => {
             title="Have a project in mind?"
           />
           <p className="mt-3 text-sm text-[#9ba4ab]">
-            Get in touch and let me know what you need. I'd love to hear about your project.
+            Get in touch and let me know what you need. I'd love to hear about
+            your project.
           </p>
         </div>
 
         <form onSubmit={onSubmit} ref={formRef}>
-          <Box sx={{ display: 'grid', gap: 2.5, width: '100%' }}>
+          <Box sx={{ display: "grid", gap: 2.5, width: "100%" }}>
             {fields.map((field) => (
               <TextField
                 label={field.label}
@@ -133,38 +132,37 @@ export const ContactSection = () => {
               disabled={isSubmitting}
               fullWidth
               endIcon={
-                isSubmitting ? (
-                  <CircularProgress size={20} />
-                ) : (
-                  <SendIcon />
-                )
+                isSubmitting ? <CircularProgress size={20} /> : <SendIcon />
               }
               sx={{
-                background: 'linear-gradient(to bottom right, #f9a66c, #ff6f59)',
-                color: '#f8f5ff',
-                fontWeight: 'bold',
-                textTransform: 'none',
-                padding: '12px 20px',
-                fontSize: '1rem',
-                borderRadius: '8px',
-                boxShadow: '0 26px 70px rgba(0,0,0,0.35)',
-                '&:hover': {
-                  background: 'linear-gradient(to bottom right, #ff8a50, #ff5a45)',
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
+                background:
+                  "linear-gradient(to bottom right, #f9a66c, #ff6f59)",
+                color: "#f8f5ff",
+                fontWeight: "bold",
+                textTransform: "none",
+                padding: "12px 20px",
+                fontSize: "1rem",
+                borderRadius: "8px",
+                boxShadow: "0 26px 70px rgba(0,0,0,0.35)",
+                "&:hover": {
+                  background:
+                    "linear-gradient(to bottom right, #ff8a50, #ff5a45)",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 30px 80px rgba(0,0,0,0.4)",
                 },
-                '&:disabled': {
-                  background: 'linear-gradient(to bottom right, #9ba4ab, #7a8290)',
-                  color: '#f8f5ff',
+                "&:disabled": {
+                  background:
+                    "linear-gradient(to bottom right, #9ba4ab, #7a8290)",
+                  color: "#f8f5ff",
                 },
-                transition: 'all 0.2s ease',
+                transition: "all 0.2s ease",
               }}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </Box>
         </form>
       </section>
     </>
-  )
-}
+  );
+};

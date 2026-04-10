@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { SectionHeading } from './SectionHeading'
-import { SERVICES } from '../content'
+import { motion } from "framer-motion";
+import { SectionHeading } from "./SectionHeading";
+import { SERVICES } from "../content";
 
 export const ServicesSection = () => {
   return (
@@ -10,13 +10,13 @@ export const ServicesSection = () => {
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.55, ease: 'easeOut' }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
     >
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
       >
         <SectionHeading
           eyebrow="Services"
@@ -31,14 +31,19 @@ export const ServicesSection = () => {
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.45, delay: index * 0.08, ease: 'easeOut' }}
-            whileHover={{ y: -5, borderColor: 'rgba(249, 166, 108, 0.38)' }}
+            transition={{
+              duration: 0.45,
+              delay: index * 0.08,
+              ease: "easeOut",
+            }}
+            whileHover={{ y: -5, borderColor: "rgba(249, 166, 108, 0.38)" }}
           >
-            <p className="text-[0.95rem] leading-[1.65] text-[#9ba4ab]">{service}</p>
+            <p className="text-[0.95rem] leading-[1.65] text-[#9ba4ab]">
+              {service}
+            </p>
           </motion.article>
         ))}
       </div>
     </motion.section>
-  )
-}
-
+  );
+};
