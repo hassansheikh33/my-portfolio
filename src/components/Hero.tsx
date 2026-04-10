@@ -20,41 +20,92 @@ type AnimatedStatValueProps = {
   value: string
 }
 
-const AnimatedStatValue = ({ value }: AnimatedStatValueProps) => {
-  const strongRef = useRef<HTMLElement | null>(null)
-  const isInView = useInView(strongRef, { once: true, amount: 0.8 })
-  const [displayValue, setDisplayValue] = useState(value)
+type TypewriterTextProps = {
+  text: string
+  speed?: number
+}
+
+const TypewriterText = ({ text, speed = 34 }: TypewriterTextProps) => {
+  const [visibleChars, setVisibleChars] = useState(0)
+  const restartDelay = 5000
 
   useEffect(() => {
-    const parsedValue = value.match(statPattern)
+    const timer = window.setTimeout(
+      () => {
+        if (visibleChars >= text.length) {
+          setVisibleChars(0)
+          return
+        }
+
+        setVisibleChars((current) => current + 1)
+      },
+      visibleChars >= text.length ? restartDelay : speed,
+    )
+
+    return () => {
+      window.clearTimeout(timer)
+    }
+  }, [visibleChars, text.length, speed])
+
+  return (
+    <span className="relative inline-block align-top">
+      <span className="invisible">{text}</span>
+      <span className="absolute inset-0">
+        {text.slice(0, visibleChars)}
+        <motion.span
+          animate={{ opacity: [1, 0, 1] }}
+          aria-hidden="true"
+          transition={{ duration: 0.9, ease: 'linear', repeat: Infinity }}
+        >
+          |
+        </motion.span>
+      </span>
+    </span>
+  )
+}
+
+const AnimatedStatValue = ({ value }: AnimatedStatValueProps) => {
+  const strongRef = useRef<HTMLElement | null>(null)
+  const numberRef = useRef<HTMLSpanElement | null>(null)
+  const isInView = useInView(strongRef, { once: true, amount: 0.8 })
+  const parsedValue = value.match(statPattern)
+  const decimals = parsedValue && parsedValue[2].includes('.') ? parsedValue[2].split('.')[1].length : 0
+
+  useEffect(() => {
+    if (!numberRef.current) return
 
     if (!parsedValue) {
-      setDisplayValue(value)
+      numberRef.current.textContent = value
       return
     }
 
-    const [, prefix, numericText, suffix] = parsedValue
-    const target = Number(numericText)
-    const decimalPlaces = numericText.includes('.') ? numericText.split('.')[1].length : 0
+    const prefix = parsedValue[1]
+    const target = Number(parsedValue[2])
+    const suffix = parsedValue[3]
 
-    if (!isInView) {
-      setDisplayValue(`${prefix}${decimalPlaces > 0 ? '0.0' : '0'}${suffix}`)
-      return
+    const formatValue = (latest: number) => {
+      const rounded = decimals > 0 ? latest.toFixed(decimals) : Math.round(latest).toString()
+      return `${prefix}${rounded}${suffix}`
     }
+
+    numberRef.current.textContent = formatValue(0)
+
+    if (!isInView) return
 
     const controls = animate(0, target, {
       duration: 1.8,
       ease: 'easeOut',
       onUpdate: (latest) => {
-        const rounded = decimalPlaces > 0 ? latest.toFixed(decimalPlaces) : Math.round(latest).toString()
-        setDisplayValue(`${prefix}${rounded}${suffix}`)
+        if (numberRef.current) {
+          numberRef.current.textContent = formatValue(latest)
+        }
       },
     })
 
     return () => {
       controls.stop()
     }
-  }, [isInView, value])
+  }, [decimals, isInView, parsedValue, value])
 
   return (
     <motion.strong
@@ -65,7 +116,7 @@ const AnimatedStatValue = ({ value }: AnimatedStatValueProps) => {
       viewport={{ once: true, amount: 0.8 }}
       transition={{ duration: 0.85, ease: 'easeOut' }}
     >
-      {displayValue}
+      <span ref={numberRef}>{parsedValue ? `${parsedValue[1]}${decimals > 0 ? '0.0' : '0'}${parsedValue[3]}` : value}</span>
     </motion.strong>
   )
 }
@@ -81,7 +132,7 @@ export const Hero = ({ designation, title, summary, name, stats }: HeroProps) =>
           {designation}
         </p>
         <h1 className="max-w-[12ch] text-[clamp(2.4rem,5vw,4.3rem)] leading-[0.95] tracking-[-0.05em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif]">
-          {title}
+          <TypewriterText key={title} text={title} />
         </h1>
         <p className="mt-4 max-w-[38ch] text-base leading-[1.55] text-[#9ba4ab]">{summary}</p>
         <div className="mt-7 flex flex-wrap gap-3 max-[640px]:items-stretch">
