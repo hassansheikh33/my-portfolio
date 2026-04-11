@@ -20,12 +20,13 @@ export const ABOUT_DESCRIPTION =
 
 export const SERVICES = [
   "Full-stack web apps with React, Node.js, and Express",
+  "Server-side rendering with Next.js for SEO and performance",
+  "Responsive UI design with clean, modern aesthetics",
   "REST APIs, authentication, and backend workflows",
   "MongoDB and SQL data modeling for production apps",
-  "Responsive UI design with clean, modern aesthetics",
+  "Payment integration and e-commerce solutions",
   "Database optimization and API performance",
   "Deployment, testing, and code quality assurance",
-  "Payment integration and e-commerce solutions",
   "AI integration for smarter user experiences and automation",
 ];
 
