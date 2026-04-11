@@ -1,27 +1,21 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { PROJECTS } from "../content";
 import { SectionHeading } from "./SectionHeading";
 
 export const ProjectsSection = () => {
-  const projects = PROJECTS;
-  const scrollingProjects = useMemo(
-    () => [...projects, ...projects],
-    [projects],
-  );
   const trackRef = useRef<HTMLDivElement | null>(null);
   const x = useMotionValue(0);
-  const [halfTrackWidth, setHalfTrackWidth] = useState(0);
+  const [trackWidth, setTrackWidth] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
   const isPaused = isHovered || isPressed;
-  const safeProjectCount = Math.max(projects.length, 1);
 
   useEffect(() => {
     const updateTrackWidth = () => {
       const fullWidth = trackRef.current?.scrollWidth ?? 0;
-      setHalfTrackWidth(fullWidth / 2);
+      setTrackWidth(fullWidth);
     };
 
     updateTrackWidth();
@@ -30,16 +24,16 @@ export const ProjectsSection = () => {
     return () => {
       window.removeEventListener("resize", updateTrackWidth);
     };
-  }, [projects.length]);
+  }, []);
 
   useAnimationFrame((_, delta) => {
-    if (isPaused || halfTrackWidth === 0) return;
+    if (isPaused || trackWidth === 0) return;
 
     const speed = 34;
     const next = x.get() - (speed * delta) / 1000;
 
-    if (Math.abs(next) >= halfTrackWidth) {
-      x.set(next + halfTrackWidth);
+    if (Math.abs(next) >= trackWidth) {
+      x.set(0);
       return;
     }
 
@@ -78,29 +72,57 @@ export const ProjectsSection = () => {
           onPointerCancel={() => setIsPressed(false)}
           onLostPointerCapture={() => setIsPressed(false)}
         >
-          {scrollingProjects.map((project, index) => (
+          {PROJECTS.map((project, index) => (
             <motion.article
               className="w-[88vw] max-w-[360px] shrink-0 max-[640px]:w-[84vw]"
-              key={`${project.name}-${index}`}
+              key={project.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{
                 duration: 0.45,
-                delay: (index % safeProjectCount) * 0.08,
+                delay: index * 0.08,
                 ease: "easeOut",
               }}
               whileHover={{ y: -6 }}
             >
               <div className="flex min-h-full flex-col gap-[14px] rounded-[22px] border border-white/10 bg-white/[0.035] p-5 max-[640px]:rounded-[18px]">
                 <span className="text-[0.78rem] font-extrabold tracking-[0.22em] text-[#f9a66c]">
-                  0{(index % safeProjectCount) + 1}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 <p className="text-[0.76rem] font-bold uppercase tracking-[0.16em] text-[#ff6f59]">
                   {project.type}
                 </p>
                 <h3 className="text-[1.4rem] tracking-[-0.04em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif]">
-                  {project.name}
+                  {project.url ? (
+                    <a
+                      className="inline-flex cursor-pointer items-center gap-2 underline-offset-4 hover:underline"
+                      href={project.url}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <span>{project.name}</span>
+                      {project.url && (
+                        <svg
+                          aria-hidden="true"
+                          className="h-4 w-4 opacity-85"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M14 5h5v5m0-5-8 8M10 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="1.8"
+                          />
+                        </svg>
+                      )}
+                    </a>
+                  ) : (
+                    project.name
+                  )}
                 </h3>
                 <p className="text-[0.95rem] leading-[1.65] text-[#9ba4ab]">
                   {project.description}

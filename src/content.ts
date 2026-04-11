@@ -2,6 +2,7 @@ export type Project = {
   name: string;
   type: string;
   description: string;
+  url?: string;
 };
 
 export const BRAND_NAME = "Muhammad Hassan Bilal";
@@ -30,22 +31,60 @@ export const SERVICES = [
 
 export const PROJECTS: Project[] = [
   {
-    name: "Codelet Digital",
-    type: "Services Platform",
+    name: "Sales Assist",
+    type: "SaaS Platform",
     description:
-      "A custom-built services platform with a Next.js frontend, Node.js backend, and MongoDB database, designed for seamless service delivery and easy client management.",
+      "A full-stack SaaS solution built with React and Node.js that streamlines sales workflows. It enables businesses to track leads, manage customer relationships, and gain actionable insights through real-time analytics.",
+    url: "https://salesassist.live",
+  },
+  {
+    name: "Codelet Digital",
+    type: "Service Management Platform",
+    description:
+      "A scalable services platform powered by Next.js and Node.js, focused on efficient client onboarding, service delivery, and streamlined project management through a clean and responsive interface.",
+    url: "https://codeletdigital.com",
   },
   {
     name: "Metro.pk",
-    type: "E-commerce Platform",
+    type: "Product Catalog",
     description:
-      "A full-stack e-commerce platform built with React, Node.js, and SQL, featuring a user-friendly interface, secure payment processing, and efficient inventory management.",
+      "A high-performance product catalog for Metro Cash & Carry, designed with React and a Node.js backend. It offers structured product browsing, category navigation, and an intuitive user experience.",
+    url: "https://metro.pk",
   },
   {
-    name: "Tarzkar.pk",
-    type: "Furniture Website",
+    name: "Metro Online",
+    type: "E-commerce Platform",
     description:
-      "A modern furniture website developed using React and Express, with a MongoDB database for product management, offering a sleek design and smooth user experience for browsing and purchasing furniture online.",
+      "A robust e-commerce application delivering a seamless shopping experience with features like dynamic product listings, secure checkout, and user account management, built on a modern MERN stack.",
+    url: "https://metro-online.pk",
+  },
+  {
+    name: "Admin Panel for METRO",
+    type: "Admin Dashboard",
+    description:
+      "A comprehensive private admin dashboard built with React and Node.js, designed to manage inventory, orders, and customer data for Metro Cash & Carry. It features real-time analytics, user management, and efficient content updates.",
+  },
+  {
+    name: "Tarzkar",
+    type: "Furniture E-commerce",
+    description:
+      "A visually polished furniture platform focused on user experience and performance. Built with React and Express, it enables smooth product discovery, browsing, and online purchasing.",
+    url: "https://tarzkar.pk",
+  },
+
+  {
+    name: "Undesked",
+    type: "Frontline Workforce Management Platform",
+    description:
+      "A productivity platform built in MERN stack to manage frontline workforce operations, including scheduling, task management, and communication. It offers a user-friendly interface for both employees and managers to optimize workforce efficiency.",
+    url: "https://undesked.com",
+  },
+
+  {
+    name: "Undesked Dashboard",
+    type: "Admin Panel",
+    description:
+      "A private dashboard for Undesked, built with React, PHP Laravel, and SQL. Designed to manage user data, monitor system performance, and provide insights through real-time analytics. It features secure authentication and an intuitive interface for efficient administration.",
   },
 ];
 
