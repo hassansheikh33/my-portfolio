@@ -31,17 +31,10 @@ export const SERVICES = [
 
 export const PROJECTS: Project[] = [
   {
-    name: "Sales Assist",
-    type: "SaaS Platform",
-    description:
-      "A full-stack SaaS solution built with React and Node.js that streamlines sales workflows. It enables businesses to track leads, manage customer relationships, and gain actionable insights through real-time analytics.",
-    url: "https://salesassist.live",
-  },
-  {
     name: "Codelet Digital",
     type: "Service Management Platform",
     description:
-      "A scalable services platform powered by Next.js and Node.js, focused on efficient client onboarding, service delivery, and streamlined project management through a clean and responsive interface.",
+      "A scalable services platform powered by Next.js, focused on efficient client onboarding, service delivery, and streamlined project management through a clean and responsive interface.",
     url: "https://codeletdigital.com",
   },
   {
@@ -65,10 +58,17 @@ export const PROJECTS: Project[] = [
       "A comprehensive private admin dashboard built with React and Node.js, designed to manage inventory, orders, and customer data for Metro Cash & Carry. It features real-time analytics, user management, and efficient content updates.",
   },
   {
+    name: "Sales Assist",
+    type: "SaaS Platform",
+    description:
+      "A full-stack SaaS solution built with Angular and Node.js that streamlines sales workflows. It enables businesses to track leads, manage customer relationships, and gain actionable insights through real-time analytics.",
+    url: "https://salesassist.live",
+  },
+  {
     name: "Tarzkar",
     type: "Furniture E-commerce",
     description:
-      "A visually polished furniture platform focused on user experience and performance. Built with React and Express, it enables smooth product discovery, browsing, and online purchasing.",
+      "A visually polished furniture platform focused on user experience and performance. Built with Next.js, it enables smooth product discovery, browsing, and online purchasing.",
     url: "https://tarzkar.pk",
   },
 
