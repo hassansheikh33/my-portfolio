@@ -17,12 +17,12 @@ export const AboutSection = () => {
           {ABOUT_DESCRIPTION}
         </p>
         <ul
-          className="m-0 flex list-none flex-wrap gap-3 p-0"
+          className="m-0 flex w-full list-none flex-wrap justify-evenly gap-3 p-0"
           aria-label="Skills"
         >
           {SKILLS.map((skill) => (
             <li
-              className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-3 font-semibold text-[#f7f2ff]"
+              className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-3 font-semibold text-[#f7f2ff] max-[640px]:text-sm"
               key={skill}
             >
               {skill}

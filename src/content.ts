@@ -89,16 +89,19 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SKILLS = [
+  "HTML",
+  "CSS",
+  "Tailwind CSS",
+  "Responsive design",
   "JavaScript",
   "React.js",
   "Next.js",
-  "SQL",
   "TypeScript",
-  "Responsive design",
   "Redux/Toolkit",
   "Node.js",
   "Express",
   "MongoDB",
+  "SQL",
 ];
 
 export const HERO_STATS = [
