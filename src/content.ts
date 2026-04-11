@@ -15,8 +15,11 @@ export const HERO_CONTENT = {
   name: "MHB",
 };
 
+export const ABOUT_TITLE =
+  "Focused on useful systems, readable interfaces, and smooth delivery.";
+
 export const ABOUT_DESCRIPTION =
-  "I build full-stack web apps from interface to database. My work combines React, Node.js, Express, MongoDB, and SQL to create products that are practical, fast, and easy to maintain.";
+  "My skills include, but are not limited to the following:";
 
 export const SERVICES = [
   "Full-stack web apps with React, Node.js, and Express",
