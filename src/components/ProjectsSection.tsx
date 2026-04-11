@@ -4,18 +4,29 @@ import { PROJECTS } from "../content";
 import { SectionHeading } from "./SectionHeading";
 
 export const ProjectsSection = () => {
+  const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const wheelTimeoutRef = useRef<number | null>(null);
   const x = useMotionValue(0);
-  const [trackWidth, setTrackWidth] = useState(0);
+  const [singleTrackWidth, setSingleTrackWidth] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  const loopedProjects = [...PROJECTS, ...PROJECTS];
 
   const isPaused = isHovered || isPressed;
+
+  const normalizeX = (value: number) => {
+    if (singleTrackWidth === 0) return value;
+
+    let normalized = value % singleTrackWidth;
+    if (normalized > 0) normalized -= singleTrackWidth;
+    return normalized;
+  };
 
   useEffect(() => {
     const updateTrackWidth = () => {
       const fullWidth = trackRef.current?.scrollWidth ?? 0;
-      setTrackWidth(fullWidth);
+      setSingleTrackWidth(fullWidth / 2);
     };
 
     updateTrackWidth();
@@ -23,22 +34,45 @@ export const ProjectsSection = () => {
 
     return () => {
       window.removeEventListener("resize", updateTrackWidth);
+      if (wheelTimeoutRef.current) {
+        window.clearTimeout(wheelTimeoutRef.current);
+      }
     };
   }, []);
 
   useAnimationFrame((_, delta) => {
-    if (isPaused || trackWidth === 0) return;
+    if (isPaused || singleTrackWidth === 0) return;
 
     const speed = 34;
-    const next = x.get() - (speed * delta) / 1000;
+    let next = x.get() - (speed * delta) / 1000;
 
-    if (Math.abs(next) >= trackWidth) {
-      x.set(0);
-      return;
+    if (next <= -singleTrackWidth) {
+      next += singleTrackWidth;
     }
 
     x.set(next);
   });
+
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    const delta =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY)
+        ? event.deltaX
+        : event.deltaY;
+
+    if (delta === 0) return;
+
+    event.preventDefault();
+    setIsPressed(true);
+    x.set(normalizeX(x.get() - delta));
+
+    if (wheelTimeoutRef.current) {
+      window.clearTimeout(wheelTimeoutRef.current);
+    }
+
+    wheelTimeoutRef.current = window.setTimeout(() => {
+      setIsPressed(false);
+    }, 120);
+  };
 
   return (
     <motion.section
@@ -60,11 +94,20 @@ export const ProjectsSection = () => {
           title="Projects shaped to balance product goals, speed, and clarity."
         />
       </motion.div>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden" onWheel={handleWheel} ref={viewportRef}>
         <motion.div
-          className="flex w-max gap-4"
+          className="flex w-max cursor-grab gap-4 active:cursor-grabbing"
           ref={trackRef}
           style={{ x }}
+          drag="x"
+          dragConstraints={{ left: -singleTrackWidth, right: 0 }}
+          dragElastic={0.05}
+          dragMomentum={false}
+          onDragStart={() => setIsPressed(true)}
+          onDragEnd={() => {
+            x.set(normalizeX(x.get()));
+            setIsPressed(false);
+          }}
           onHoverStart={() => setIsHovered(true)}
           onHoverEnd={() => setIsHovered(false)}
           onPointerDown={() => setIsPressed(true)}
@@ -72,10 +115,10 @@ export const ProjectsSection = () => {
           onPointerCancel={() => setIsPressed(false)}
           onLostPointerCapture={() => setIsPressed(false)}
         >
-          {PROJECTS.map((project, index) => (
+          {loopedProjects.map((project, index) => (
             <motion.article
               className="w-[88vw] max-w-[360px] shrink-0 max-[640px]:w-[84vw]"
-              key={project.name}
+              key={`${project.name}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
@@ -84,12 +127,8 @@ export const ProjectsSection = () => {
                 delay: index * 0.08,
                 ease: "easeOut",
               }}
-              whileHover={{ y: -6 }}
             >
               <div className="flex min-h-full flex-col gap-[14px] rounded-[22px] border border-white/10 bg-white/[0.035] p-5 max-[640px]:rounded-[18px]">
-                <span className="text-[0.78rem] font-extrabold tracking-[0.22em] text-[#f9a66c]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <p className="text-[0.76rem] font-bold uppercase tracking-[0.16em] text-[#ff6f59]">
                   {project.type}
                 </p>

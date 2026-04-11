@@ -89,20 +89,32 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SKILLS = [
-  "React",
+  "JavaScript",
+  "React.js",
+  "Next.js",
+  "SQL",
   "TypeScript",
+  "Responsive design",
+  "Redux/Toolkit",
   "Node.js",
   "Express",
   "MongoDB",
-  "SQL",
-  "Vite",
-  "CSS architecture",
-  "Accessibility",
-  "Responsive design",
 ];
 
 export const HERO_STATS = [
   { value: "2.5+", label: "years building web apps" },
-  { value: "30+", label: "pages and products shipped" },
+  { value: "90+", label: "pages and products shipped" },
   { value: "100%", label: "focused on responsive design" },
+  {
+    value: "10+",
+    label: "production-grade apps deployed",
+  },
+  {
+    value: "100%",
+    label: "committed to clean code and maintainable architecture",
+  },
+  {
+    value: "100%",
+    label: "dedicated to optimizing performance and user experience",
+  },
 ];

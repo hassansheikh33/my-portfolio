@@ -15,10 +15,10 @@ export const Navigation = () => {
   return (
     <header className="sticky top-0 z-20 mb-2 flex items-center justify-between gap-4 rounded-b-[24px] px-5 pb-6 pt-2 backdrop-blur-[14px] max-[768px]:rounded-none max-[768px]:px-0 max-[768px]:pb-4 max-[768px]:pt-2">
       <a
-        className="whitespace-nowrap pl-2 text-[1.1rem] font-bold tracking-[0.08em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif] max-[640px]:text-[0.9rem] flex items-center"
+        className="hover:text-[#f9a66c] whitespace-nowrap pl-2 text-[1.1rem] font-bold tracking-[0.08em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif] max-[640px]:text-[0.9rem] flex items-center"
         href="#home"
       >
-        <CodeIcon className="mr-2 h-5 w-5" />
+        <CodeIcon className="mr-2 h-5 w-5 hover:text-[#f9a66c]" />
         {BRAND_NAME}
       </a>
       <nav
@@ -27,7 +27,7 @@ export const Navigation = () => {
       >
         {navLinks.map((link) => (
           <a
-            className="transition-colors duration-200 hover:text-[#f7f2ff]"
+            className="transition-colors text-[#f7f2ff] duration-200 hover:text-[#f9a66c]"
             href={link.href}
             key={link.href}
           >
@@ -69,7 +69,7 @@ export const Navigation = () => {
       >
         {navLinks.map((link, index) => (
           <a
-            className={`py-2 text-[0.92rem] font-medium text-[#9ba4ab] transition-all duration-200 hover:text-[#f7f2ff] ${
+            className={`py-2 text-[0.92rem] font-medium text-[#f7f2ff] transition-all duration-200 hover:text-[#f7f2ff] ${
               isOpen ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0"
             }`}
             href={link.href}

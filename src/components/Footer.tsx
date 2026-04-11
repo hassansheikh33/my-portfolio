@@ -39,7 +39,7 @@ export const Footer = () => {
       <div className="mx-auto mb-6 flex w-full max-w-[1120px] items-center justify-between gap-8 px-5 max-[768px]:flex-col max-[640px]:px-3">
         <div className="flex items-center">
           <div className="flex items-center gap-2">
-            <CodeOffIcon className="h-5 w-5 transition-colors duration-200 hover:text-[#f9a66c]" />
+            <CodeOffIcon className="h-5 w-5 text-white transition-colors duration-200 hover:text-[#f9a66c]" />
             <p className="text-lg font-bold tracking-[0.08em] text-[#f7f2ff] [font-family:'Space_Grotesk',sans-serif]">
               Portfolio
             </p>
@@ -55,7 +55,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition-all duration-200 hover:border-[#f9a66c]"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-[#f7f2ff] transition-all duration-200 hover:border-[#f9a66c]"
                 key={link.href}
               >
                 <Icon className="h-5 w-5 transition-colors duration-200 hover:text-[#f9a66c]" />
