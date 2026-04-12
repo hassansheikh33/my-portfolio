@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
     type: "Furniture E-commerce",
     description:
       "A visually polished furniture platform focused on user experience and performance. Built with Next.js, it enables smooth product discovery, browsing, and online purchasing.",
-    url: "https://tarzkar.pk",
+    url: "https://tarzkar.com",
   },
 
   {
