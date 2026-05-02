@@ -77,7 +77,7 @@ export const ProjectsSection = () => {
   return (
     <motion.section
       className="mb-3 border-b border-white/10 py-[30px]"
-      id="work"
+      id="projects"
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}

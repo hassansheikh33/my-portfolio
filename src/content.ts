@@ -102,6 +102,7 @@ export const SKILLS = [
   "HTML",
   "CSS",
   "Tailwind CSS",
+  "Bootstrap",
   "Responsive design",
   "JavaScript",
   "React.js",
@@ -110,8 +111,16 @@ export const SKILLS = [
   "Redux/Toolkit",
   "Node.js",
   "Express",
+  "REST APIs",
+  "JWT authentication",
   "MongoDB",
+  "DB Modeling",
   "SQL",
+  "git/GitHub/GitLab",
+  "Docker",
+  "Unit Testing (Jest, Cypress)",
+  "Performance optimization",
+  "AI integration",
 ];
 
 export const RESUME_TITLE =
@@ -136,4 +145,12 @@ export const HERO_STATS = [
     value: "100%",
     label: "dedicated to optimizing performance and user experience",
   },
+];
+
+export const navLinks = [
+  { href: "#services", label: "Services" },
+  { href: "#projects", label: "Projects" },
+  { href: "#skill", label: "Skills" },
+  { href: "#resume", label: "Resume" },
+  { href: "#contact", label: "Contact" },
 ];

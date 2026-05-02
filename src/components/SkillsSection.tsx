@@ -22,13 +22,13 @@ const skillsBubbleVariants = {
   },
 };
 
-export const AboutSection = () => {
+export const SkillsSection = () => {
   return (
     <section
       className="mb-3 grid items-start gap-[22px] border-b border-white/10 py-[30px] max-[920px]:grid-cols-1 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]"
-      id="about"
+      id="skill"
     >
-      <SectionHeading className="mb-0" eyebrow="About" title={ABOUT_TITLE} />
+      <SectionHeading className="mb-0" eyebrow="Skills" title={ABOUT_TITLE} />
       <div className="grid gap-[18px]">
         <motion.p
           className="text-[0.95rem] leading-[1.65] text-[#9ba4ab]"
@@ -49,7 +49,7 @@ export const AboutSection = () => {
         >
           {SKILLS.map((skill) => (
             <motion.li
-              className="rounded-full border border-white/10 bg-white/[0.035] px-4 py-3 font-semibold text-[#f7f2ff] max-[640px]:text-sm"
+              className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-[0.86rem] font-semibold leading-none text-[#f7f2ff] max-[640px]:px-2.5 max-[640px]:py-1.5 max-[640px]:text-[0.78rem]"
               key={skill}
               variants={skillsBubbleVariants}
             >

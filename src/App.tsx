@@ -1,4 +1,4 @@
-import { AboutSection } from "./components/AboutSection";
+import { SkillsSection } from "./components/SkillsSection";
 import { ContactSection } from "./components/ContactSection";
 import { Hero } from "./components/Hero";
 import { Navigation } from "./components/Navigation";
@@ -15,7 +15,7 @@ export const App = () => {
         <Hero />
         <ServicesSection />
         <ProjectsSection />
-        <AboutSection />
+        <SkillsSection />
         <ResumeSection />
         <ContactSection />
       </main>

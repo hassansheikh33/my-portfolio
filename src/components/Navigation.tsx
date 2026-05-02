@@ -1,14 +1,6 @@
 import { useNavbarMenu } from "../hooks/navbar";
 import CodeIcon from "@mui/icons-material/Code";
-import { BRAND_NAME } from "../content";
-
-const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
-  { href: "#resume", label: "Resume" },
-  { href: "#contact", label: "Contact" },
-];
+import { BRAND_NAME, navLinks } from "../content";
 
 export const Navigation = () => {
   const { isOpen, toggle, close } = useNavbarMenu();
