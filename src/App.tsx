@@ -3,6 +3,7 @@ import { ContactSection } from "./components/ContactSection";
 import { Hero } from "./components/Hero";
 import { Navigation } from "./components/Navigation";
 import { ProjectsSection } from "./components/ProjectsSection";
+import { ResumeSection } from "./components/ResumeSection";
 import { ServicesSection } from "./components/ServicesSection";
 import { Footer } from "./components/Footer";
 
@@ -15,6 +16,7 @@ export const App = () => {
         <ServicesSection />
         <ProjectsSection />
         <AboutSection />
+        <ResumeSection />
         <ContactSection />
       </main>
       <Footer />

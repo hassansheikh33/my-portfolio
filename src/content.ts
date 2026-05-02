@@ -90,6 +90,12 @@ export const PROJECTS: Project[] = [
     description:
       "A private dashboard for Undesked, built with React, PHP Laravel, and SQL. Designed to manage user data, monitor system performance, and provide insights through real-time analytics. It features secure authentication and an intuitive interface for efficient administration.",
   },
+  {
+    name: "Ninja Splitter",
+    type: "Payment Split App",
+    description:
+      "A simple payment splitting app built with React and Node.js, designed to help users easily split bills and manage shared expenses. It features a clean interface for creating groups, adding expenses, and tracking payments.",
+  },
 ];
 
 export const SKILLS = [
@@ -107,6 +113,12 @@ export const SKILLS = [
   "MongoDB",
   "SQL",
 ];
+
+export const RESUME_TITLE =
+  "Here's my Resume, a full picture of my experience, skills, and background.";
+
+export const RESUME_URL =
+  "https://drive.google.com/file/d/1Gmj65S4pWUdozk1maOJYMWVI8dscl9To/view?usp=sharing";
 
 export const HERO_STATS = [
   { value: "2.5+", label: "years building web apps" },
