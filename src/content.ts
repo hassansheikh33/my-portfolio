@@ -77,6 +77,13 @@ export const PROJECTS: Project[] = [
   },
 
   {
+    name: "LobbyFox",
+    type: "Visitor Management System",
+    description:
+      "A cloud visitor management system with kiosk check-in, badge printing, and compliance-ready screening, plus multilingual flows and real-time reporting. It offers a user-friendly interface for both employees and managers to optimize workforce efficiency.",
+    url: "https://lobbyfox.com",
+  },
+  {
     name: "Undesked",
     type: "Frontline Workforce Management Platform",
     description:
